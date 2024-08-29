@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<div th:replace="cabecalho :: head"></div>
+
+	<title>Crud Manager - Aeroportos</title>
+</head>
+<body>
+	<div th:include="navmenu :: header"></div>
+	<div class="container my-2">
+		<h1>Aeroportos</h1>
+		<div>
+			<a th:href="@{/aeroportos/form}"
+			   class="btn btn-primary btn-sm mb-3 float-right"> 
+				Adicionar Aeroporto
+			</a>
+		</div>
+		<table class="table table-striped table-responsive-md">
+			<thead>
+				<tr>
+					<th>Nome</th>
+					<th>Código</th>
+					<th>Localização</th>
+					<th>Número de Terminais</th>
+					<th>Ações</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="aeroporto : ${aeroportos}">
+					<td th:text="${aeroporto.getName()}"></td>
+					<td th:text="${aeroporto.getCode()}"></td>
+					<td th:text="${aeroporto.getLocation()}"></td>
+					<td th:text="${aeroporto.getTerminalCount()}"></td>
+					<td>
+						<a class="btn btn-primary"
+						   th:href="@{/aeroportos/update/{id}(id = ${aeroporto.getId()})}">
+							Alterar
+						</a>
+						<a class="btn btn-danger"
+						   th:href="@{/aeroportos/delete/{id}(id = ${aeroporto.getId()})}">
+							Excluir
+						</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

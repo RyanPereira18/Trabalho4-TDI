@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+	<div th:replace="cabecalho :: head"></div>
+
+	<title>Crud Manager - Form Aeroporto</title>
+</head>
+
+<body>
+	<div class="container my-2">
+		<h2>Aeroporto</h2>
+		
+		<form th:action="@{/aeroportos/register}" 
+		      method="POST"
+		      th:object="${aeroporto}" 
+		      action="#">
+			
+			<input type="hidden" id="id" th:field="*{id}">
+			
+			<span class="text-danger"
+				  th:if="${#fields.hasErrors('name')}"
+				  th:errors="*{name}">
+			</span>
+			<input type="text" placeholder="Nome do Aeroporto" 
+			       class="form-control mb-4 col-4"
+			       th:field="*{name}"> 
+			
+			<span class="text-danger"
+				  th:if="${#fields.hasErrors('code')}"
+				  th:errors="*{code}">
+			</span>
+			<input type="text" placeholder="Código IATA/ICAO" 
+				   class="form-control mb-4 col-4"
+				   th:field="*{code}">
+			
+			<span class="text-danger"
+				  th:if="${#fields.hasErrors('location')}"
+				  th:errors="*{location}">
+			</span>
+			<input type="text" placeholder="Localização" 
+				   class="form-control mb-4 col-4"
+				   th:field="*{location}">
+				   
+			<span class="text-danger"
+				  th:if="${#fields.hasErrors('terminalCount')}"
+				  th:errors="*{terminalCount}">
+			</span>
+			<input type="number" placeholder="Número de Terminais"
+			       class="form-control mb-4 col-4"
+			       th:field="*{terminalCount}">
+			
+			<button type="submit" 
+			        class="btn btn-info col-2">Salvar</button>
+			
+		</form>
+		
+		<hr>
+		
+		<a th:href="@{/aeroportos}"> Aeroportos </a>
+	</div>
+</body>
+</html>

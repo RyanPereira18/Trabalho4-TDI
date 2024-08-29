@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+	<div th:replace="cabecalho :: head"></div>
+
+	<title>Crud Manager - Form Voo</title>
+</head>
+
+<body>
+	<div class="container my-2">
+		<h2>Voo</h2>
+		
+		<form th:action="@{/voos/register}" 
+		      method="POST"
+		      th:object="${voo}" 
+		      action="#">
+			
+			<input type="hidden" id="id" th:field="*{id}">
+			
+			<span class="text-danger"
+				  th:if="${#fields.hasErrors('numero')}"
+				  th:errors="*{numero}">
+			</span>
+			<input type="text" placeholder="Número do Voo" 
+			       class="form-control mb-4 col-4"
+			       th:field="*{numero}"> 
+			
+			<span class="text-danger"
+				  th:if="${#fields.hasErrors('origem')}"
+				  th:errors="*{origem}">
+			</span>
+			<select class="form-control mb-4 col-4" 
+			        th:field="*{origem}" th:object="${voo}">
+				<option th:each="aeroporto : ${aeroportos}"
+				        th:value="${aeroporto}" 
+				        th:text="${aeroporto.name}">Origem</option>
+			</select>
+			
+			<span class="text-danger"
+				  th:if="${#fields.hasErrors('destino')}"
+				  th:errors="*{destino}">
+			</span>
+			<select class="form-control mb-4 col-4" 
+			        th:field="*{destino}" th:object="${voo}">
+				<option th:each="aeroporto : ${aeroportos}"
+				        th:value="${aeroporto}" 
+				        th:text="${aeroporto.name}">Destino</option>
+			</select>
+			
+			<span class="text-danger"
+				  th:if="${#fields.hasErrors('dataPartida')}"
+				  th:errors="*{dataPartida}">
+			</span>
+			<input type="text" placeholder="Data de Partida" 
+				   class="form-control mb-4 col-4"
+				   th:field="*{dataPartida}">
+				   
+			<span class="text-danger"
+				  th:if="${#fields.hasErrors('dataChegada')}"
+				  th:errors="*{dataChegada}">
+			</span>
+			<input type="text" placeholder="Data de Chegada" 
+			       class="form-control mb-4 col-4"
+			       th:field="*{dataChegada}">
+			
+			<button type="submit" 
+			        class="btn btn-info col-2">Salvar</button>
+			
+		</form>
+		
+		<hr>
+		
+		<a th:href="@{/voos}"> Voos </a>
+	</div>
+</body>
+</html>
